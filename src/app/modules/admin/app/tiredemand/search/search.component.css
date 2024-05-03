@@ -1,0 +1,9 @@
+.result-table {
+    width: 100%;
+  }
+  .link{
+    text-decoration: underline;
+  }
+  .items-center{
+    width:50px !important;
+  }

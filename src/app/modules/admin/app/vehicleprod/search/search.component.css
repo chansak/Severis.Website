@@ -1,0 +1,18 @@
+.result-table {
+    width: 100%;
+  }
+  
+  .result-button-container {
+    padding-bottom: 16px;
+  }
+  
+  .result-button + .result-button {
+    margin-left: 8px;
+  }
+  .link{
+    text-decoration: underline;
+  }
+  :host ::ng-deep .mat-form-field-wrapper{
+    margin: 0 !important;
+    padding: 0;
+  }

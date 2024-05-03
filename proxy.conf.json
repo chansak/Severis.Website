@@ -1,0 +1,16 @@
+  {
+    "/api": {
+      "target": "http://localhost:5205",
+      "pathRewrite": {"^/api" : "http://localhost:5205"},
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "info"
+    },
+    "/signalr": {
+      "target": "http://localhost:5205",
+      "secure": false,
+      "ws": true,
+      "changeOrigin": true,
+      "logLevel": "debug"
+    }
+  }

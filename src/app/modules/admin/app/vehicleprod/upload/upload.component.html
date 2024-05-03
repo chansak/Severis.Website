@@ -1,0 +1,290 @@
+<div class="flex flex-col flex-auto min-w-0">
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Application Module</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Estimate Vehicle Production</a>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Files Upload
+                </h2>
+            </div>
+        </div>
+    </div>
+    <!-- Main -->
+    <div class="flex-auto p-6 sm:p-10">
+        <div class="max-w-8xl">
+            <form
+                class="p-4 bg-card shadow rounded overflow-hidden"
+                [formGroup]="horizontalStepperForm">
+                <mat-horizontal-stepper
+                    [linear]="true"
+                    #horizontalStepper>
+                    <ng-template matStepperIcon="edit">
+                        <mat-icon>check</mat-icon>
+                    </ng-template>
+                    <mat-step
+                        [formGroupName]="'step1'"
+                        [stepControl]="horizontalStepperForm.get('step1')"
+                        #horizontalStepperStep1>
+                        <ng-template matStepLabel>Basic information</ng-template>
+                        <p class="my-6 font-medium">
+                            Fill in year and version for the file upload
+                        </p>
+                        <div class="flex flex-col gt-xs:flex-row">
+                            <mat-form-field class="flex-auto gt-xs:pr-3">
+                                <mat-select
+                                    [formControlName]="'year'"
+                                    [placeholder]="'Year'"
+                                    [(ngModel)]="selectedYear"
+                                    (selectionChange)="onYearSelecting($event)"
+                                    required>
+                                    <mat-option value="2022">2022</mat-option>
+                                    <mat-option value="2021">2021</mat-option>
+                                    <mat-option value="2020">2020</mat-option>
+                                </mat-select>
+                                <mat-icon class="icon-size-5" matPrefix svgIcon="heroicons_outline:calendar"></mat-icon>
+                            </mat-form-field>
+                            <mat-form-field class="flex-auto gt-xs:pl-3">
+                                <input
+                                    matInput
+                                    [formControlName]="'version'"
+                                    [placeholder]="'Version'"
+                                    readonly
+                                    disabled
+                                    required>
+                            </mat-form-field>
+                        </div>
+                        <div class="flex justify-end">
+                            <button
+                                class="px-8"
+                                mat-flat-button
+                                [color]="'primary'"
+                                [disabled]="horizontalStepperStep1.stepControl.pristine || horizontalStepperStep1.stepControl.invalid"
+                                type="button"
+                                matStepperNext>
+                                Next
+                            </button>
+                        </div>
+                    </mat-step>
+
+                    <mat-step
+                        [formGroupName]="'step2'"
+                        [stepControl]="horizontalStepperForm.get('step2')"
+                        #horizontalStepperStep2>
+                        <ng-template matStepLabel>Estimate Total Vehicle File</ng-template>
+                        <p class="my-6 font-medium">
+                            Select estimate vehicle production upload file
+                        </p>
+                        <div class="flex flex-col gt-xs:flex-row">
+                            <div class="flex flex-col gt-xs:flex-row">
+                                <input type="file" class="file-input"
+                                [formControlName]="'files'"
+                                (change)="onFileSelected($event)" 
+                                accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                                #fileUpload>
+                         
+                                <div class="file-upload">
+                                    <span *ngIf="files.length==0">No file uploaded yet.</span>
+                                    <button mat-mini-fab color="primary" class="upload-btn"
+                                    (click)="fileUpload.click()">
+                                        <mat-icon>attach_file</mat-icon>
+                                    </button>
+                                </div>
+                                <ng-container *ngIf="files.length > 0">
+                                    <div>
+                                        <div class="font-medium">Files</div>
+                                        <span *ngIf="files.length>0">You selected: {{files.length}} file(s)</span>
+                                        <div
+                                            class="flex flex-wrap -m-2 mt-2">
+                                            <ng-container *ngFor="let file of files; trackBy:trackByFn">
+                                                <a
+                                                    class="flex flex-col w-40 h-40 m-2 p-4 shadow rounded-2xl cursor-pointer bg-card" alt="{{file.name}}">
+                                                    <div class="aspect-[9/6]">
+                                                        <div class="flex items-center justify-center h-full">
+                                                            <div class="relative">
+                                                                <mat-icon
+                                                                    class="icon-size-14 text-hint opacity-50"
+                                                                    [svgIcon]="'heroicons_solid:document'"></mat-icon>
+                                                                <div
+                                                                    class="absolute left-0 bottom-0 px-1.5 rounded text-sm font-semibold leading-5 text-white"
+                                                                    [class.bg-red-600]="file.type === 'PDF'"
+                                                                    [class.bg-blue-600]="file.type === 'DOC'"
+                                                                    [class.bg-green-600]="file.type === 'XLS'"
+                                                                    [class.bg-gray-600]="file.type === 'TXT'"
+                                                                    [class.bg-amber-600]="file.type === 'JPG'">
+                                                                    {{file.type.toUpperCase()}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex flex-col flex-auto justify-center text-center text-sm font-medium">
+                                                        <div
+                                                            class="truncate"
+                                                            [matTooltip]="file.name">{{file.name}}</div>
+                                                        <ng-container *ngIf="file.size">
+                                                            <div class="text-secondary truncate">{{file.size/1024| number : '1.0-2'}}Kb</div>
+                                                        </ng-container>
+                                                        <ng-container *ngIf="file.contents">
+                                                            <div class="text-secondary truncate">{{file.contents}}</div>
+                                                        </ng-container>
+                                                    </div>
+                                                </a>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="flex justify-end">
+                            <button
+                                class="px-8 mr-2"
+                                mat-flat-button
+                                [color]="'accent'"
+                                type="button"
+                                matStepperPrevious>
+                                Back
+                            </button>
+                            <button
+                                class="px-8"
+                                mat-flat-button
+                                [color]="'primary'"
+                                [disabled]="horizontalStepperStep2.stepControl.pristine || horizontalStepperStep2.stepControl.invalid"
+                                type="button"
+                                matStepperNext>
+                                Next
+                            </button>
+                        </div>
+                    </mat-step>
+
+                    <mat-step
+                        [formGroupName]="'step3'"
+                        [stepControl]="horizontalStepperForm.get('step3')"
+                        #horizontalStepperStep3
+                        [optional]="true">
+                        <ng-template matStepLabel>Reference Files</ng-template>
+                        <p class="my-6 font-medium">
+                            Select reference upload files
+                        </p>
+                        <div class="flex flex-col gt-xs:flex-row">
+                                <input type="file" multiple  class="file-input"
+                                [formControlName]="'refFiles'"
+                                (change)="onRefFileSelected($event)" 
+                                accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                                #refFileUpload>
+                         
+                                <div class="file-upload">
+                                    <span *ngIf="refFiles.length==0">No file uploaded yet.</span>
+                                    <button mat-mini-fab color="primary" class="upload-btn"
+                                    (click)="refFileUpload.click()">
+                                        <mat-icon>attach_file</mat-icon>
+                                    </button>
+                                </div>
+                                <ng-container *ngIf="refFiles.length > 0">
+                                    <div>
+                                        <div class="font-medium">Files</div>
+                                        <span *ngIf="refFiles.length>0">You selected: {{refFiles.length}} file(s)</span>
+                                        <div
+                                            class="flex flex-wrap -m-2 mt-2">
+                                            <ng-container *ngFor="let file of refFiles; trackBy:trackByFn">
+                                                <a
+                                                    class="flex flex-col w-40 h-40 m-2 p-4 shadow rounded-2xl cursor-pointer bg-card" alt="{{file.name}}">
+                                                    <div class="aspect-[9/6]">
+                                                        <div class="flex items-center justify-center h-full">
+                                                            <div class="relative">
+                                                                <mat-icon
+                                                                    class="icon-size-14 text-hint opacity-50"
+                                                                    [svgIcon]="'heroicons_solid:document'"></mat-icon>
+                                                                <div
+                                                                    class="absolute left-0 bottom-0 px-1.5 rounded text-sm font-semibold leading-5 text-white"
+                                                                    [class.bg-red-600]="file.type === 'PDF'"
+                                                                    [class.bg-blue-600]="file.type === 'DOC'"
+                                                                    [class.bg-green-600]="file.type === 'XLS'"
+                                                                    [class.bg-gray-600]="file.type === 'TXT'"
+                                                                    [class.bg-amber-600]="file.type === 'JPG'">
+                                                                    {{file.type.toUpperCase()}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex flex-col flex-auto justify-center text-center text-sm font-medium">
+                                                        <div
+                                                            class="truncate"
+                                                            [matTooltip]="file.name">{{file.name}}</div>
+                                                        <ng-container *ngIf="file.size">
+                                                            <div class="text-secondary truncate">{{file.size/1024| number : '1.0-2'}}Kb</div>
+                                                        </ng-container>
+                                                        <ng-container *ngIf="file.contents">
+                                                            <div class="text-secondary truncate">{{file.contents}}</div>
+                                                        </ng-container>
+                                                    </div>
+                                                </a>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                        </div>
+                        <div class="flex justify-end mt-8">
+                            <button
+                                class="px-8 mr-2"
+                                mat-flat-button
+                                [color]="'accent'"
+                                type="button"
+                                [disabled]="clicked"
+                                matStepperPrevious>
+                                Back
+                            </button>
+                            <button
+                                class="px-8"
+                                mat-flat-button
+                                [color]="'primary'"
+                                type="button"
+                                (click)="uploaEstimateTotalVehicleProduction()"
+                                [disabled]="clicked"
+                                matStepperNext>
+                                Next
+                            </button>
+                        </div>
+                    </mat-step>
+
+                    <mat-step>
+                        <ng-template matStepLabel>Done</ng-template>
+                        <p class="my-6 font-medium">
+                            You have done uploading the files.
+                        </p>
+                        <!-- <div class="flex justify-end mt-8">
+                            <button
+                                class="px-8 mr-2"
+                                mat-flat-button
+                                [color]="'accent'"
+                                type="button"
+                                matStepperPrevious>
+                                Back
+                            </button>
+                            <button
+                                class="px-8"
+                                mat-flat-button
+                                [color]="'primary'"
+                                type="reset"
+                                (click)="horizontalStepper.reset();">
+                                Reset
+                            </button>
+                        </div> -->
+                    </mat-step>
+                </mat-horizontal-stepper>
+            </form>
+        </div>
+    </div>
+</div>
+
