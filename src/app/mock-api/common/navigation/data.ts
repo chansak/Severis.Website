@@ -13,84 +13,23 @@ export const defaultNavigation: FuseNavigationItem[] = [
     {
         id      : 'app',
         title   : 'Application Modules',
-        subtitle: 'OE Budget Sytem',
+        subtitle: 'Severis Sytem',
         type    : 'group',
         icon    : 'mat_outline:apps',
         children: [
             {
-                id   : 'app.vehicleprod',
-                title: 'Estimate Vehicle Production',
+                id   : 'app.floor',
+                title: 'Floor Plan',
                 type : 'collapsable',
-                icon : 'mat_outline:directions_car_filled',
+                icon : 'mat_outline:camera_outdoor',
                 children:[
                     {
-                        id        : 'app.vehicleprod.search',
+                        id        : 'app.floor.search',
                         title     : 'Search',
                         type      : 'basic',
                         icon      : "heroicons_outline:document-search",
-                        link      : '/app/vehicleprod/search',
+                        //link      : '/app/vehicleprod/search',
                         exactMatch: true
-                    },
-                    {
-                        id   : 'app.vehicleprod.upload',
-                        title: 'Upload File',
-                        type : 'basic',
-                        icon : 'heroicons_outline:upload',
-                        link : '/app/vehicleprod/upload'
-                    },
-                    // {
-                    //     id   : 'app.vehicleprod.checking',
-                    //     title: 'Status checking',
-                    //     type : 'basic',
-                    //     icon: 'heroicons_outline:clipboard-list',
-                    //     link : '/app/vehicleprod/checking'
-                    // },
-                ]
-            },
-            {
-                id   : 'app.tiredemand',
-                title: 'Tire Demand',
-                type : 'collapsable',
-                icon : 'mat_solid:album',
-                link : '/app/tiredemand',
-                children:[
-                    {
-                        id   : 'app.tiredemand.search',
-                        title: 'Upload File',
-                        type : 'basic',
-                        icon : 'heroicons_outline:search',
-                        link : '/app/tiredemand/search'
-                    },
-                ]
-            },
-            {
-                id   : 'app.saledemand',
-                title: 'Sales Demand',
-                type : 'collapsable',
-                icon : 'mat_solid:attach_money',
-                link : '/app/saledemand',
-                children:[
-                    {
-                        id        : 'app.saledemand.home',
-                        title     : 'Search',
-                        type      : 'basic',
-                        icon      : "heroicons_outline:document-search",
-                        link      : '/app/saledemand',
-                        exactMatch: true
-                    },
-                    {
-                        id   : 'app.saledemand.upload',
-                        title: 'Upload File',
-                        type : 'basic',
-                        icon : 'heroicons_outline:upload',
-                        link : '/app/saledemand/upload'
-                    },
-                    {
-                        id   : 'app.saledemand.search',
-                        title: 'Status checking',
-                        type : 'basic',
-                        icon: 'heroicons_outline:clipboard-list',
-                        link : '/app/saledemand/search'
                     },
                 ]
             },
@@ -255,80 +194,96 @@ export const horizontalNavigation: FuseNavigationItem[] = [
     {
         id      : 'app',
         title   : 'Application Modules',
-        subtitle: 'OE Budget Sytem',
+        subtitle: 'Severis Sytem',
         type    : 'group',
         icon    : 'mat_outline:apps',
         children: [
             {
-                id   : 'app.vehicleprod',
-                title: 'Estimate Vehicle Production',
-                type : 'collapsable',
-                icon : 'mat_outline:directions_car_filled',
-                children:[
-                    {
-                        id        : 'app.vehicleprod.search',
-                        title     : 'Search',
-                        type      : 'basic',
-                        icon      : "heroicons_outline:document-search",
-                        link      : '/app/vehicleprod/search',
-                        exactMatch: true
-                    },
-                    {
-                        id   : 'app.vehicleprod.upload',
-                        title: 'Upload File',
-                        type : 'basic',
-                        icon : 'heroicons_outline:upload',
-                        link : '/app/vehicleprod/upload'
-                    },
-                ]
-            },
-            {
-                id   : 'app.tiredemand',
-                title: 'Tire Demand',
-                type : 'collapsable',
-                icon : 'mat_solid:album',
-                link : '/app/tiredemand',
-                children:[
-                    {
-                        id   : 'app.tiredemand.search',
-                        title: 'Upload File',
-                        type : 'basic',
-                        icon : 'heroicons_outline:upload',
-                        link : '/app/tiredemand/search'
-                    },
-                ]
-            },
-            {
-                id   : 'app.saledemand',
-                title: 'Sales Demand',
-                type : 'collapsable',
-                icon : 'mat_solid:attach_money',
-                link : '/app/saledemand',
-                children:[
-                    {
-                        id        : 'app.saledemand.home',
-                        title     : 'Search',
-                        type      : 'basic',
-                        icon      : "heroicons_outline:document-search",
-                        link      : '/app/saledemand',
-                        exactMatch: true
-                    },
-                    {
-                        id   : 'app.saledemand.upload',
-                        title: 'Upload File',
-                        type : 'basic',
-                        icon : 'heroicons_outline:upload',
-                        link : '/app/saledemand/upload'
-                    },
-                    {
-                        id   : 'app.saledemand.search',
-                        title: 'Status checking',
-                        type : 'basic',
-                        icon: 'heroicons_outline:clipboard-list',
-                        link : '/app/saledemand/search'
-                    },
-                ]
-            },
+                    id   : 'app.floor',
+                    title: 'Floor Plan',
+                    type : 'collapsable',
+                    icon : 'mat_outline:directions_car_filled',
+                    children:[
+                        {
+                            id        : 'app.floor.search',
+                            title     : 'Search',
+                            type      : 'basic',
+                            icon      : "heroicons_outline:document-search",
+                            //link      : '/app/vehicleprod/search',
+                            exactMatch: true
+                        },
+                    ]
+                },
+            // {
+            //     id   : 'app.vehicleprod',
+            //     title: 'Estimate Vehicle Production',
+            //     type : 'collapsable',
+            //     icon : 'mat_outline:directions_car_filled',
+            //     children:[
+            //         {
+            //             id        : 'app.vehicleprod.search',
+            //             title     : 'Search',
+            //             type      : 'basic',
+            //             icon      : "heroicons_outline:document-search",
+            //             link      : '/app/vehicleprod/search',
+            //             exactMatch: true
+            //         },
+            //         {
+            //             id   : 'app.vehicleprod.upload',
+            //             title: 'Upload File',
+            //             type : 'basic',
+            //             icon : 'heroicons_outline:upload',
+            //             link : '/app/vehicleprod/upload'
+            //         },
+            //     ]
+            // },
+            // {
+            //     id   : 'app.tiredemand',
+            //     title: 'Tire Demand',
+            //     type : 'collapsable',
+            //     icon : 'mat_solid:album',
+            //     link : '/app/tiredemand',
+            //     children:[
+            //         {
+            //             id   : 'app.tiredemand.search',
+            //             title: 'Upload File',
+            //             type : 'basic',
+            //             icon : 'heroicons_outline:upload',
+            //             link : '/app/tiredemand/search'
+            //         },
+            //     ]
+            // },
+            // {
+            //     id   : 'app.saledemand',
+            //     title: 'Sales Demand',
+            //     type : 'collapsable',
+            //     icon : 'mat_solid:attach_money',
+            //     link : '/app/saledemand',
+            //     children:[
+            //         {
+            //             id        : 'app.saledemand.home',
+            //             title     : 'Search',
+            //             type      : 'basic',
+            //             icon      : "heroicons_outline:document-search",
+            //             link      : '/app/saledemand',
+            //             exactMatch: true
+            //         },
+            //         {
+            //             id   : 'app.saledemand.upload',
+            //             title: 'Upload File',
+            //             type : 'basic',
+            //             icon : 'heroicons_outline:upload',
+            //             link : '/app/saledemand/upload'
+            //         },
+            //         {
+            //             id   : 'app.saledemand.search',
+            //             title: 'Status checking',
+            //             type : 'basic',
+            //             icon: 'heroicons_outline:clipboard-list',
+            //             link : '/app/saledemand/search'
+            //         },
+            //     ]
+            // },
         ]
     },
     {

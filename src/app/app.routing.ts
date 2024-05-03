@@ -80,33 +80,33 @@ export const appRoutes: Route[] = [
             ]},
             
             {path: 'app', children: [
-                {path: 'vehicleprod', children: [
-                    {
-                        path: 'checking/:id', 
-                        loadChildren: () => import('app/modules/admin/app/vehicleprod/checking/checking.module').then(m => m.CheckingModule),
-                    },
+                {path: 'floor', children: [
                     {
                         path: 'search', loadChildren: () => import('app/modules/admin/app/vehicleprod/search/search.module').then(m => m.SearchingModule)},
-                    {
-                        path: 'upload', 
-                        loadChildren: () => import('app/modules/admin/app/vehicleprod/upload/upload.module').then(m => m.UploadModule)
-                    }
                 ]},
-                {
-                    path: 'tiredemand', children: [
-                    // {
-                    //     path: 'checking/:id', 
-                    //     loadChildren: () => import('app/modules/admin/app/vehicleprod/checking/checking.module').then(m => m.CheckingModule),
-                    // },
-                    {
-                        path: 'search', 
-                        loadChildren: () => import('@module/admin/app/tiredemand/search/search.module').then(m => m.TireDemandSearchModule)
-                    },
-                    {
-                        path: 'view/:id', 
-                        loadChildren: () => import('@module/admin/app/tiredemand/view/view.module').then(m => m.TireDemandViewModule)
-                    }
-                ]},
+                // {path: 'vehicleprod', children: [
+                //     {
+                //         path: 'checking/:id', 
+                //         loadChildren: () => import('app/modules/admin/app/vehicleprod/checking/checking.module').then(m => m.CheckingModule),
+                //     },
+                //     {
+                //         path: 'search', loadChildren: () => import('app/modules/admin/app/vehicleprod/search/search.module').then(m => m.SearchingModule)},
+                //     {
+                //         path: 'upload', 
+                //         loadChildren: () => import('app/modules/admin/app/vehicleprod/upload/upload.module').then(m => m.UploadModule)
+                //     }
+                // ]},
+                // {
+                //     path: 'tiredemand', children: [
+                //     {
+                //         path: 'search', 
+                //         loadChildren: () => import('@module/admin/app/tiredemand/search/search.module').then(m => m.TireDemandSearchModule)
+                //     },
+                //     {
+                //         path: 'view/:id', 
+                //         loadChildren: () => import('@module/admin/app/tiredemand/view/view.module').then(m => m.TireDemandViewModule)
+                //     }
+                // ]},
             ]},
 
             // Setting
